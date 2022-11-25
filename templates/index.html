@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+  <form class="mb-3" method="post">
+    {% csrf_token %}
+    <label for="task" class="form-label mt-3">Task Name</label>
+    <input type="text" class="form-control" id="task" name="task">
+    <label for="priority" class="form-label">Priority</label>
+    <input type="number" class="form-control" id="priority" name="priority">
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+  </div>
+</div>
+{% endblock %}
