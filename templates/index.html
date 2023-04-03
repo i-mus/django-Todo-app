@@ -1,19 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="banner d-flex align-items-center justify-content-center">
-      <div class="banner-text"><h2>ToDo</h2></div>
-    </div>
-  </div>
-</div>
+
 
 <div class="container">
   <div class="row">
     <div class="col-6">
       <form class="shadow p-3" method="post">
         {% csrf_token %}
-        <label for="task" class="form-label mt-3">Task Name</label>
+        <h3>Add Your Tasks</h3>
+        <label for="username" class="form-label mt-3">Your user name</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+        <label for="task" class="form-label">Task Name</label>
         <input type="text" class="form-control" id="task" name="task">
         <label for="priority" class="form-label">Priority</label>
         <input type="number" class="form-control" id="priority" name="priority">

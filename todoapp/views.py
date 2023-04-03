@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from todoapp.forms import Todoform
@@ -36,17 +37,21 @@ class Tasklistview(ListView):
 
 
 # Create your views here.
+@login_required
 def index(request):
-    taskAll = Task.objects.all()
+    username = request.user.username
+    taskAll = Task.objects.all().filter(username=username)
     if request.method == 'POST':
+        un = request.POST.get('username')
         name = request.POST.get('task')
         priority = request.POST.get('priority')
         date = request.POST.get('date')
-        newtask = Task(name=name, priority=priority, date=date)
+        newtask = Task(username=un, name=name, priority=priority, date=date)
         newtask.save()
+    print(username)
     return render(request, 'index.html', {'task': taskAll})
 
-
+@login_required
 def delete(request, id):
     taskdone = Task.objects.get(id=id)
     if request.method == 'POST':
@@ -54,7 +59,7 @@ def delete(request, id):
         return redirect('/')
     return render(request, 'delete.html')
 
-
+@login_required
 def update(request, id):
     task = Task.objects.get(id=id)
     f = Todoform(request.POST or None, instance=task)

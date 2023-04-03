@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="banner d-flex align-items-center justify-content-center">
+      <div class="banner-text text-danger"><h2>ToDo</h2></div>
+        <span style="position:absolute; right:5px">
+            {% if user.is_authenticated %}
+            <p class="text text-white m-2" style="display: inline;">Hi {{user.username}}...</p>
+            <a href="{% url 'accounts:logout' %}"><button class="btn btn-info">Logout</button></a>
+            {% else %}
+            <p class="text text-white m-2" style="display: inline;">Hi.. Please Login</p>
+            <a href="{% url 'accounts:register' %}"><button class="btn btn-info">Register</button></a>>
+            <a href="{% url 'accounts:login' %}"><button class="btn btn-info">Login</button></a>>
+            {% endif %}
+        </span>
+    </div>
+
+  </div>
+</div>
 {% block body %}
 
 {% endblock %}
